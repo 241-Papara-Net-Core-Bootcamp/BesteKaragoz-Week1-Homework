@@ -16,12 +16,12 @@ namespace Owner.API.Controllers
     public class OwnerController : Controller
     {
 
-        // GET
+        // GET 
         [Route("All")]
         [HttpGet]
         public IActionResult GetOwners()
         {
-            var ownersDatas = new OwnerData().GetAll();
+            var ownersDatas = new OwnerData().GetAll(); // Get all owners from owner data
             return Ok(ownersDatas);
         }
         //POST
@@ -31,11 +31,11 @@ namespace Owner.API.Controllers
         public IActionResult CreateOwner(OwnerModel owner)
         {
             if (owner.Description.ToLower().Contains("hack"))
-                return BadRequest("You cannot add a description containing hack keyword"); 
+                return BadRequest("You cannot add a description containing hack keyword");  // Description check
             else
             {
                 var ownersDatas = new OwnerData().GetAll();
-                ownersDatas.Add(owner);
+                ownersDatas.Add(owner); // Create new owner 
                 return Ok(ownersDatas);
             }
         }
@@ -49,13 +49,13 @@ namespace Owner.API.Controllers
             }
             else if (owner.Description.ToLower().Contains("hack"))
             {
-                return BadRequest("You cannot update a description containing hack keyword");
+                return BadRequest("You cannot update a description containing hack keyword"); // Description check
             }
             else
             {
                 var ownersDatas = new OwnerData().GetAll();
                 var ownerId = ownersDatas.FirstOrDefault(x => x.Id == id);
-                ownerId.Name = owner.Name;
+                ownerId.Name = owner.Name;    // Update owner properties
                 ownerId.Surname = owner.Surname;
                 ownerId.Description = owner.Description;
                 ownerId.Date = owner.Date;
@@ -72,14 +72,14 @@ namespace Owner.API.Controllers
         {
             var ownersDatas = new OwnerData().GetAll();
             var ownerId = ownersDatas.FirstOrDefault(x => x.Id == id);
-            if (ownerId==null)
+            if (ownerId==null).  // id check
             {
                 return NotFound("Owner's id did not found.");
 
             }
             else
             {
-                ownersDatas.Remove(ownerId);
+                ownersDatas.Remove(ownerId);  // Deleted owner
                 return Ok("Owner deleted successfully.");
             }
         }
