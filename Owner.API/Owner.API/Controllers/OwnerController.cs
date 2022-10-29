@@ -72,7 +72,7 @@ namespace Owner.API.Controllers
         {
             var ownersDatas = new OwnerData().GetAll();
             var ownerId = ownersDatas.FirstOrDefault(x => x.Id == id);
-            if (ownerId==null).  // id check
+            if (ownerId==null) // id check
             {
                 return NotFound("Owner's id did not found.");
 
@@ -83,7 +83,6 @@ namespace Owner.API.Controllers
                 return Ok("Owner deleted successfully.");
             }
         }
-      
 
     }
 }
